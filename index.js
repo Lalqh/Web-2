@@ -19,22 +19,19 @@ app.post("/games", (req, res) => {
     res.send("Se agrego el juego")
 });
 
-app.patch("/games:id", (req, res) => {
+app.patch("/games/:id", (req, res) => {
     const { body }  = req
     const { name } = body
-    const { params } = req.params
-    const { id } = params
+    const { id } = req.params;
+    
     let game = games.find((game) => game.id == id)
     game.name = name
     res.send({message: "se elimino el juego", game})
 });
 
-app.delete("/games:id", (req, res) => {
-    const { body }  = req
-    const { name } = body
-    const { params } = req.params
-    const { id } = params
-    let game = games.filter((game) => game.id != id)
+app.delete("/games/:id", (req, res) => {
+    const { id } = req.params;
+    games = games.filter((game) => game.id != id)
     res.send("Se elimino el juego")
 });
 
